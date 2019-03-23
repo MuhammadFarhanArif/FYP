@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="shortcut icon" href="">
+</head>
+<body>
+        <!-- Citizens Form -->
+        <h2><b>Citizen Form</b></h2>
+        <form action="/getCitizen" method="GET">
+            <input type="text" id="username" placeholder="Name">
+            <input type="number" id="cnic" placeholder="CNIC">
+            <input type="number" id="phoneno" placeholder="Phone#">
+            <input type="text" id="flatno" placeholder="Flat#">
+        </form><br>
+        <div>
+                <button onclick="addCitizens()">Add Citizen</button>
+                <button onclick="getCitizens()">View Citizens</button>
+                <button onclick="deleteCitizens()">Delete Citizen</button>
+        </div><hr/>
+        <!-- Employees Form -->
+        <div>
+            <h2><b>Employees Form</b></h2>
+        <form action="/getEmp" method="GET">
+            <input type="text" id="ename" placeholder="Name">
+            <input type="number" id="ecnic" placeholder="CNIC">
+            <input type="number" id="ephoneno" placeholder="Phone#">
+            <h5>Expertations:</h5>
+                <select id="expert">
+                    <option>Plumber</option>
+                    <option>Electrician</option>
+                    <option>Driver</option>
+                    <option>Sweeper</option>
+                </select><br/><br/>
+        </form><br>
+        </div>
+        <div>
+                <button onclick="addEmp()">Add Employee</button>
+                <button onclick="getEmp()">View Employees</button>
+                <button onclick="deleteEmp()">Delete Employee</button>
+        </div><hr/>
+        <!-- Announcements -->
+        <div>
+            <h2><b>Announcements Form</b></h2>
+            <form action="">
+                <input type="text" placeholder="Title..." id="title"/>
+                <textarea id="ann" cols="30" rows="10" placeholder="Write Announcements Here..."></textarea>
+            </form>
+            <div><button onclick="addAnn()">Add Announcement</button></div>
+        </div><hr/>
+
+        <div>
+        <form action="/login" method="post">
+            <div>
+                <label>Username:</label>
+                <input type="text" name="username"/>
+            </div>
+            <div>
+                <label>Password:</label>
+                <input type="password" name="password"/>
+            </div>
+            <div>
+                <input type="submit" value="Log In"/>
+            </div>
+        </form>
+    </div>
+
+
+       <!-- Outputs -->
+        <h2><b>Citizens:</b></h2>
+        <div id="demo1"></div>
+        <hr/>
+        <h2><b>Employees:</b></h2>
+        <div id="demo2"></div>
+        <h2><b>Announcements:</b></h2>
+        <div id="demo3"></div>
+
+        <script>
+            // Citizens Fetch APIs
+            function addCitizens(){
+                var options={
+                    method:'POST',
+                    body:JSON.stringify({Username:username.value,Cnic:cnic.value,Phoneno:phoneno.value,Flatno:flatno.value}),
+                    headers:{
+                        'Content-Type': 'application/json'
+                    }
+                }
+                fetch('/addCitizen',options)
+                .then((res)=>res.text())
+                .then((message)=>console.log(message))
+                .catch((error)=>console.log(error))
+            }
+
+            function getCitizens(){
+                fetch('/getCitizen')
+                .then((res)=>res.text())
+                .then((data)=>{
+                    console.log(data)
+                    document.getElementById('demo1').innerText=data
+                    })
+                .catch((error)=>console.log(error))
+            }
+
+
+            function deleteCitizens() {
+
+                var options = {
+                    method: 'DELETE',
+                    body: JSON.stringify({Username:username.value}),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+                fetch('/deleteCitizen', options)
+                .then((res) => res.text())
+                .then((message) => console.log(message))
+                .catch((error) => console.log(error))
+
+            }
+
+            // Employees Fetch APIs
+
+            function addEmp(){
+                var options={
+                    method:'POST',
+                    body:JSON.stringify({Eusername:ename.value,Ecnic:ecnic.value,Ephoneno:ephoneno.value,Expert:expert.value}),
+                    headers:{
+                        'Content-Type': 'application/json'
+                    }
+                }
+                fetch('/addEmp',options)
+                .then((res)=>res.text())
+                .then((message)=>console.log(message))
+                .catch((error)=>console.log(error))
+            }
+
+            function getEmp(){
+                fetch('/getEmp')
+                .then((res)=>res.text())
+                .then((data)=>{
+                    console.log(data)
+                    document.getElementById('demo2').innerText=data
+                    })
+                .catch((error)=>console.log(error))
+            }
+
+            function deleteEmp(){
+                var options = {
+                    method: 'DELETE',
+                    body: JSON.stringify({Eusername:ename.value}),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+                fetch('/deleteEmp', options)
+                .then((res) => res.text())
+                .then((message) => console.log(message))
+                .catch((error) => console.log(error))
+
+            }
+
+            // Announcements Fetch APIs
+
+            function addAnn(){
+                var options={
+                    method:'POST',
+                    body:JSON.stringify({Title:title.value, Ann:ann.value}),
+                    headers:{
+                        'Content-Type': 'application/json'
+                    }
+                }
+                fetch('/addAnn',options)
+                .then((res)=>res.text())
+                .then((message)=>console.log(message))
+                .catch((error)=>console.log(error))
+            }
+            function getAnn(){
+                fetch('/getAnn')
+                .then((res)=>res.text())
+                .then((data)=>{
+                    console.log(data)
+                    document.getElementById('demo3').innerText=data
+                    })
+                .catch((error)=>console.log(error))
+            }
+
+
+            
+        </script>
+</body>
+</html>
