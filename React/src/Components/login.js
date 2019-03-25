@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+import {withRouter} from 'react-router-dom'
 import './AddCitizen.css';
 class Login extends Component{
-    componentDidMount(){
-        fetch('/login')
-    }
+    // componentDidMount(){
+    //     fetch('/login').then(res => res.text()).then(string => {
+    //         console.log(string)
+    //         if(string === '/AHOME'){
+    //             this.props.history.push('/AHOME')
+    //         }
+    //     })
+    // }
     render(){
         return(
             <div className="loginform">
@@ -26,3 +32,4 @@ class Login extends Component{
     }
 }
 export default Login
+// withRouter(Login)

@@ -43,14 +43,18 @@ module.exports= function(server){
     })
 
     server.post('/addCitizen',(req,res)=>{
-        console.log(res.send('request recieved'))
-        console.log(req.body.Username)
+        // console.log(res.send('request recieved'))
+        // console.log(req.body.Username)
+        // {name:req.body.Username,cnic:req.body.Cnic,phoneno:req.body.Phoneno,flatno:req.body.Flatno}
+        
         var element=new society({name:req.body.Username,cnic:req.body.Cnic,phoneno:req.body.Phoneno,flatno:req.body.Flatno})
         element.save((err, element) => {
             if (err) {
                 return res.json({ success: false, err: err })
-            }
+            }else{
+
                 return res.json({ success: true, data: element })
+            }
         });
     })
 

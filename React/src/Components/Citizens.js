@@ -6,14 +6,10 @@ class Citizens extends Component{
     componentDidMount(){
         fetch('/getCitizen')
                 .then((res)=>res.text())
-                .then((data)=>{
-                    console.log(data)
-                    // document.getElementById('demo1').innerText=data
-                    })
-                // .then((json) => {
-                //     console.log(json)
-                //     this.props.dispatch(setCitizen(json.data))
-                //   })
+                .then((json) => {
+                    console.log(json)
+                    this.props.dispatch(setCitizen(json.data))
+                  })
                 .catch((error)=>console.log(error))
     }
     render(){

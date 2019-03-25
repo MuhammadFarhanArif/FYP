@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './AddCitizen.css';
 import {addAnnouncement} from '../Actions/announcements-action'
+import {connect} from 'react-redux'
 import store from '../Redux'
 class AddAnnouncements extends Component{
     handleSubmit=(e)=>{
@@ -11,7 +12,7 @@ class AddAnnouncements extends Component{
         
         var options={
             method:'POST',
-            body:JSON.stringify({announcement}),
+            body:JSON.stringify(announcement),
             headers:{
                 'Content-Type': 'application/json'
             }
@@ -39,4 +40,7 @@ class AddAnnouncements extends Component{
         )
     }
 }
-export default AddAnnouncements
+export default connect()(AddAnnouncements)
+// export default connect(null, {
+//     addAnnouncement
+// })(AddAnnouncements)

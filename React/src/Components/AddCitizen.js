@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './AddCitizen.css';
 import {addCitizen} from '../Actions/citizens-action' ;
+import {connect} from 'react-redux'
 import store from '../Redux'
 class AddCitizen extends Component{
     handleSubmit=(event)=>{
@@ -11,17 +12,20 @@ class AddCitizen extends Component{
         let phoneno=this.refs.phoneno.value
         let flatno=this.refs.flatno.value
         let citizen={name:name, cnic:cnic, phoneno:phoneno, flatno:flatno}
-        console.log(citizen)
+        // console.log(citizen)
         var options={
             method:'POST',
-            body:JSON.stringify({citizen}),
+            body:JSON.stringify(citizen),
             headers:{
                 'Content-Type': 'application/json'
             }
         }
         fetch('/addCitizen',options)
         .then((res)=>res.text())
-        .then((data)=>console.log(data))
+        .then((json) => {
+            console.log(json)
+            this.props.dispatch(addCitizen(json.data))
+          })
         .catch((error)=>console.log(error))
         // store.dispatch(addCitizen(citizen))
         // alert('Citizen is Added');
@@ -41,4 +45,14 @@ class AddCitizen extends Component{
         )
     }
 }
-export default AddCitizen
+export default connect()(AddCitizen)
+// export default connect(null, {
+//     addCitizen
+// })(AddCitizen)
+// function mapDispatchToProps(dispatch) {
+//     let actions = store({ addCitizen });
+//     return { ...actions, dispatch };
+//   }
+//   export default connect(null, {
+//     mapDispatchToProps
+// })(AddCitizen)

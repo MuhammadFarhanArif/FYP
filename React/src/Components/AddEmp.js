@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './AddCitizen.css';
 import {addEmp} from '../Actions/employees-action'
+import {connect} from 'react-redux'
 import store from '../Redux'
 class AddEmp extends Component{
     handleSubmit=(event)=>{
@@ -13,7 +14,7 @@ class AddEmp extends Component{
         
         var options={
             method:'POST',
-            body:JSON.stringify({employee}),
+            body:JSON.stringify( employee ),
             headers:{
                 'Content-Type': 'application/json'
             }
@@ -23,7 +24,8 @@ class AddEmp extends Component{
         .then((json) => {
             console.log(json)
             this.props.dispatch(addEmp(json.data))
-          })
+            console.log(json.data)
+        })
         .catch((error)=>console.log(error))
         // store.dispatch(addEmp(employee))
         // alert("Employee is Added")
@@ -49,4 +51,5 @@ class AddEmp extends Component{
         )
     }
 }
-export default AddEmp
+
+export default connect()(AddEmp)

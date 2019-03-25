@@ -9,7 +9,7 @@ var users = [
 
 server.use(bodyParser.urlencoded({extended: true}))
 server.use(bodyParser.json())
-server.use(express.static('./frontend'))
+server.use(express.static('./build'))
 
 require('./server/config/db-config');
 require('./server/config/passport-config')(server,users);
