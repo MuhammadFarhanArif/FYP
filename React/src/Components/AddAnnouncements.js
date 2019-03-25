@@ -8,7 +8,7 @@ class AddAnnouncements extends Component{
         e.preventDefault()
         let title=this.refs.title.value
         let announce=this.refs.announce.value
-        let announcement=[{title:title, announce:announce}]
+        let announcement={title:title, announce:announce}
         
         var options={
             method:'POST',

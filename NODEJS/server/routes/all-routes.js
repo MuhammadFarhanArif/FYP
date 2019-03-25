@@ -47,7 +47,7 @@ module.exports= function(server){
         // console.log(req.body.Username)
         // {name:req.body.Username,cnic:req.body.Cnic,phoneno:req.body.Phoneno,flatno:req.body.Flatno}
         
-        var element=new society({name:req.body.Username,cnic:req.body.Cnic,phoneno:req.body.Phoneno,flatno:req.body.Flatno})
+        var element=new society({name:req.body.name,cnic:req.body.cnic,phoneno:req.body.phoneno,flatno:req.body.flatno})
         element.save((err, element) => {
             if (err) {
                 return res.json({ success: false, err: err })
@@ -60,7 +60,7 @@ module.exports= function(server){
 
     server.delete('/deleteCitizen', (req, res, next) => {
 
-        society.deleteOne({ name: req.body.Username }, function (err) {});
+        society.deleteOne({ name: req.body.name }, function (err) {});
         // society.deleteMany({ name: req.body.Username }, function (err) {});
     })
    
@@ -68,7 +68,7 @@ module.exports= function(server){
 
     server.post('/addEmp',(req,res)=>{
 
-        var employee=new employees({ename:req.body.Eusername,ecnic:req.body.Ecnic,ephoneno:req.body.Ephoneno,expert:req.body.Expert})
+        var employee=new employees({ename:req.body.ename,ecnic:req.body.ecnic,ephoneno:req.body.ephoneno,expert:req.body.expert})
         employee.save((err, employee) => {
             if (err) {
                 return res.json({ success: false, err: err })
@@ -103,7 +103,7 @@ module.exports= function(server){
     // Announcements Routes
 
     server.post('/addAnn',(req,res)=>{
-        var announcement= new announcements({title:req.body.Title, ann:req.body.Ann})
+        var announcement= new announcements({title:req.body.title, ann:req.body.announce})
         announcement.save((err, announcement) => {
             if (err) {
                 return res.json({ success: false, err: err })

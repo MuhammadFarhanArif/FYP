@@ -8,4 +8,4 @@ const announcementsReducer=(state=[],action)=>{
         return state
     }
 }
-export default announcementsReducer
+export default {announcementsReducer}

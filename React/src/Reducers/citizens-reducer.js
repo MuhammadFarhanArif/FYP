@@ -1,4 +1,4 @@
-const citizensReducer=(state=[],action)=>{
+const citizensReducer=(state=[null],action)=>{
     switch(action.type){
         case "ADD_CITIZEN":
         return [...state,action.payload]
